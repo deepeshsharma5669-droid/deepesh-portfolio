@@ -186,8 +186,8 @@ export const projects: Project[] = [
 export const experience = {
   role: "Product & Operations Associate",
   company: "FinAce Infosolution LLP (TheFinPedia)",
-  period: "April 2025 – Present", // NOTE: the resume PDF says "August 2024". Make them match.
-  location: "Mumbai, India (Remote)",
+  period: "August 2024 – Present",
+  location: "Mumbai, India",
   points: [
     "Run UAT and production testing to validate website functionality, UI consistency and user experience",
     "Manage website content, events and updates through the CMS, keeping data accurate and on schedule",
