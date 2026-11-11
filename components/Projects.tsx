@@ -1,6 +1,15 @@
 import { projects, type Project } from "@/content/site";
 import Flow, { type FlowStep } from "./Flow";
 import Reveal from "./Reveal";
+import DashboardDemo from "./demos/DashboardDemo";
+import CrmDemo from "./demos/CrmDemo";
+import PmtDemo from "./demos/PmtDemo";
+
+const demos: Record<string, React.ReactNode> = {
+  dashboard: <DashboardDemo />,
+  crm: <CrmDemo />,
+  pmt: <PmtDemo />,
+};
 
 const flows: Record<string, FlowStep[]> = {
   dashboard: [
@@ -61,6 +70,7 @@ function CaseStudy({ p, n }: { p: Project; n: number }) {
       </div>
 
       <Flow steps={flows[p.id]} label={`${p.title} — how it fits together`} />
+      {demos[p.id]}
 
       <footer className="cs-foot">
         <p className="ai-note"><strong>How it was built:</strong> {p.aiNote}</p>
@@ -83,8 +93,8 @@ export default function Projects() {
         <p className="eyebrow">Featured projects</p>
         <h2>Problems I&apos;ve solved</h2>
         <p className="lead narrow">
-          Four internal tools built at TheFinPedia. Product screenshots contain company data, so each project is
-          shown as a case study with a conceptual diagram instead.
+          Four internal tools built at TheFinPedia. The real products contain company data, so each case study
+          pairs a diagram with an interactive demo that runs on made-up data (the pipeline has no screen to show).
         </p>
         {projects.map((p, i) => (
           <Reveal key={p.id}><CaseStudy p={p} n={i + 1} /></Reveal>
