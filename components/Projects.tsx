@@ -1,14 +1,12 @@
 import { projects, type Project } from "@/content/site";
 import Flow, { type FlowStep } from "./Flow";
 import Reveal from "./Reveal";
-import DashboardDemo from "./demos/DashboardDemo";
-import CrmDemo from "./demos/CrmDemo";
-import PmtDemo from "./demos/PmtDemo";
+import Film, { type FilmInfo } from "./Film";
 
-const demos: Record<string, React.ReactNode> = {
-  dashboard: <DashboardDemo />,
-  crm: <CrmDemo />,
-  pmt: <PmtDemo />,
+const films: Record<string, FilmInfo> = {
+  dashboard: { src: "/films/dashboard.mp4", poster: "/films/dashboard-poster.jpg", title: "Executive Dashboard", length: "47 s" },
+  crm: { src: "/films/crm.mp4", poster: "/films/crm-poster.jpg", title: "Sales CRM", length: "49 s" },
+  pmt: { src: "/films/pmt.mp4", poster: "/films/pmt-poster.jpg", title: "Project Management Tool", length: "52 s" },
 };
 
 const flows: Record<string, FlowStep[]> = {
@@ -70,7 +68,7 @@ function CaseStudy({ p, n }: { p: Project; n: number }) {
       </div>
 
       <Flow steps={flows[p.id]} label={`${p.title} — how it fits together`} />
-      {demos[p.id]}
+      {films[p.id] && <Film film={films[p.id]} />}
 
       <footer className="cs-foot">
         <p className="ai-note"><strong>How it was built:</strong> {p.aiNote}</p>
@@ -94,7 +92,7 @@ export default function Projects() {
         <h2>Problems I&apos;ve solved</h2>
         <p className="lead narrow">
           Four internal tools built at TheFinPedia. The real products contain company data, so each case study
-          pairs a diagram with an interactive demo that runs on made-up data (the pipeline has no screen to show).
+          pairs a diagram with a short film of the real app running on made-up data (the pipeline has no screen to show).
         </p>
         {projects.map((p, i) => (
           <Reveal key={p.id}><CaseStudy p={p} n={i + 1} /></Reveal>
