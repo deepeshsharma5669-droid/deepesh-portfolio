@@ -1,7 +1,7 @@
 import { site } from "@/content/site";
 
 const links = [
-  ["About", "#about"], ["Skills", "#skills"], ["Projects", "#projects"], ["Experience", "#experience"], ["Contact", "#contact"],
+  ["Work", "#work"], ["About", "#about"], ["Skills", "#skills"], ["Experience", "#experience"], ["Contact", "#contact"],
 ];
 
 export default function Nav() {

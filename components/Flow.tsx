@@ -1,9 +1,10 @@
-// A simple, responsive "how it fits together" diagram. Conceptual — not a screenshot.
+// A simple, responsive "how it fits together" diagram.
 export type FlowStep = { title: string; sub?: string };
 
 export default function Flow({ steps, label }: { steps: FlowStep[]; label: string }) {
   return (
     <figure className="flow" aria-label={label}>
+      <figcaption>How it fits together</figcaption>
       <ol>
         {steps.map((s, i) => (
           <li key={s.title}>
@@ -15,7 +16,6 @@ export default function Flow({ steps, label }: { steps: FlowStep[]; label: strin
           </li>
         ))}
       </ol>
-      <figcaption>Conceptual diagram — illustrates the approach, not a screenshot of the product.</figcaption>
     </figure>
   );
 }

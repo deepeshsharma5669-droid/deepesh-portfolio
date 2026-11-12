@@ -16,14 +16,27 @@ export const site = {
   github: "https://github.com/deepeshsharma5669-droid",
   resume: "/Deepesh_Sharma_Resume.pdf",
   location: "Maharashtra, India",
-  url: "https://deepesh-portfolio.vercel.app", // change to your real domain after deploying
+  url: "https://deepesh-portfolio-iota.vercel.app", // change if you move to a custom domain
 };
+
+// Headline numbers shown under the hero. Each one comes from a project below.
+export const stats = [
+  { value: "100+", label: "business metrics defined and validated", ref: "dashboard" },
+  { value: "40,000+", label: "records synced with zero data loss", ref: "pipeline" },
+  { value: "84%", label: "late deliveries uncovered in 2,600+ records", ref: "pmt" },
+  { value: "4", label: "internal tools taken from brief to working product", ref: "work" },
+];
 
 export const about = [
   "I work where data, product operations and technology meet. My day job at TheFinPedia, a B2B fintech content platform, is to turn questions like \"are renewals actually healthy?\" into metrics that are defined carefully, checked against the database and shown on a dashboard people use.",
   "That has meant building an executive analytics dashboard, a Google Sheets to Supabase data pipeline, a sales CRM and a project management tool. I also run UAT and production testing, manage CMS content, and write event-tracking plans, so I see both how the data is produced and how it is used.",
-  "I direct AI-assisted development and I am open about it: I did not hand-write the application code. My part is the work that decides whether a tool is right — defining requirements, designing the schema and business logic, choosing how it is built, finding the bugs, and validating every number before it ships.",
 ];
+
+// Said once, here, instead of on every project.
+export const howIWork = {
+  title: "AI writes the code. I own whether it's right.",
+  text: "I build with AI coding tools (mostly Claude) and I'm open about it. My part is the work that decides whether a tool is correct: requirements, the data model and business logic, how it's built, finding the bugs, and validating every number before it ships.",
+};
 
 export const principles = [
   { title: "Define the metric first", text: "Most dashboard bugs are definition bugs. I write down what a number means before anything is built." },
@@ -42,6 +55,10 @@ export type Project = {
   id: string;
   title: string;
   kind: string;
+  /** One line for the work grid: the result, not the feature list. */
+  headline: string;
+  /** Product film of the real app on mock data (public/films). */
+  film?: { src: string; poster: string; length: string };
   overview: string;
   problem: string;
   role: string[];
@@ -58,6 +75,8 @@ export const projects: Project[] = [
     id: "dashboard",
     title: "Executive Analytics Dashboard",
     kind: "Business intelligence",
+    headline: "One trusted view of revenue, renewals and usage, with two metric bugs found and fixed along the way.",
+    film: { src: "/films/dashboard.mp4", poster: "/films/dashboard-poster.jpg", length: "47 s" },
     overview:
       "A single internal dashboard giving leadership one trusted view of Revenue, Subscriptions, Product Usage, Customer Support and Engineering at TheFinPedia.",
     problem:
@@ -93,6 +112,7 @@ export const projects: Project[] = [
     id: "pipeline",
     title: "Automated Data Pipeline",
     kind: "Data engineering & automation",
+    headline: "Google Sheets kept in sync with Postgres: 7 tables, 40,000+ records, zero data loss.",
     overview:
       "A two-stage pipeline that keeps a production Postgres database in step with business spreadsheets, replacing repetitive manual updates.",
     problem:
@@ -127,6 +147,8 @@ export const projects: Project[] = [
     id: "crm",
     title: "Sales CRM",
     kind: "Sales operations",
+    headline: "Replaced spreadsheet outreach with segments, fair follow-up credit and campaigns; used daily by sales.",
+    film: { src: "/films/crm.mp4", poster: "/films/crm-poster.jpg", length: "49 s" },
     overview:
       "An internal CRM that replaced Excel-based outreach tracking and is used daily by the sales team.",
     problem:
@@ -156,6 +178,8 @@ export const projects: Project[] = [
     id: "pmt",
     title: "Project Management Tool (PMT)",
     kind: "Product & workflow design",
+    headline: "Analysis of 2,600+ records showed up to 84% of deliverables were late, then designed the workflow tool around it.",
+    film: { src: "/films/pmt.mp4", poster: "/films/pmt-poster.jpg", length: "52 s" },
     overview:
       "A multi-role project management tool built from an open-ended business request — Admin, Manager, Member and Client views — with the approval workflow modelled from how the team really worked.",
     problem:

@@ -1,13 +1,7 @@
 import { projects, type Project } from "@/content/site";
 import Flow, { type FlowStep } from "./Flow";
+import Film from "./Film";
 import Reveal from "./Reveal";
-import Film, { type FilmInfo } from "./Film";
-
-const films: Record<string, FilmInfo> = {
-  dashboard: { src: "/films/dashboard.mp4", poster: "/films/dashboard-poster.jpg", title: "Executive Dashboard", length: "47 s" },
-  crm: { src: "/films/crm.mp4", poster: "/films/crm-poster.jpg", title: "Sales CRM", length: "49 s" },
-  pmt: { src: "/films/pmt.mp4", poster: "/films/pmt-poster.jpg", title: "Project Management Tool", length: "52 s" },
-};
 
 const flows: Record<string, FlowStep[]> = {
   dashboard: [
@@ -36,14 +30,8 @@ const flows: Record<string, FlowStep[]> = {
   ],
 };
 
-function List({ title, items }: { title: string; items: string[] }) {
-  if (!items.length) return null;
-  return (
-    <div className="cs-block">
-      <h4>{title}</h4>
-      <ul className="ticks">{items.map((i) => <li key={i}>{i}</li>)}</ul>
-    </div>
-  );
+function Ticks({ items }: { items: string[] }) {
+  return <ul className="ticks">{items.map((i) => <li key={i}>{i}</li>)}</ul>;
 }
 
 function CaseStudy({ p, n }: { p: Project; n: number }) {
@@ -56,44 +44,51 @@ function CaseStudy({ p, n }: { p: Project; n: number }) {
         <ul className="chips" aria-label="Technology stack">{p.stack.map((s) => <li key={s}>{s}</li>)}</ul>
       </header>
 
-      <div className="cs-grid">
-        <div className="cs-block wide">
-          <h4>The problem</h4>
+      {p.film ? <Film film={{ ...p.film, title: p.title }} /> : <Flow steps={flows[p.id]} label={`${p.title}: how it fits together`} />}
+
+      <div className="cs-summary">
+        <div className="cs-col">
+          <h4><span>01</span> The problem</h4>
           <p>{p.problem}</p>
         </div>
-        <List title="My role" items={p.role} />
-        <List title="How it works" items={p.approach} />
-        <List title="Key features" items={p.features} />
-        <List title="Outcomes" items={p.outcomes} />
+        <div className="cs-col">
+          <h4><span>02</span> What I did</h4>
+          <Ticks items={p.role} />
+        </div>
+        <div className="cs-col cs-result">
+          <h4><span>03</span> The result</h4>
+          <Ticks items={p.outcomes} />
+        </div>
       </div>
 
-      <Flow steps={flows[p.id]} label={`${p.title} — how it fits together`} />
-      {films[p.id] && <Film film={films[p.id]} />}
+      <details className="cs-more">
+        <summary>Full details: how it works and key features</summary>
+        <div className="cs-more-grid">
+          <div><h4>How it works</h4><Ticks items={p.approach} /></div>
+          <div><h4>Key features</h4><Ticks items={p.features} /></div>
+        </div>
+        {p.film && <Flow steps={flows[p.id]} label={`${p.title}: how it fits together`} />}
+      </details>
 
-      <footer className="cs-foot">
-        <p className="ai-note"><strong>How it was built:</strong> {p.aiNote}</p>
-        {p.links.length > 0 && (
-          <div className="cs-links">
-            {p.links.map((l) => (
-              <a key={l.href} className="btn btn-sm" href={l.href} target="_blank" rel="noopener noreferrer">{l.label} ↗</a>
-            ))}
-          </div>
-        )}
-      </footer>
+      {p.links.length > 0 && (
+        <div className="cs-links">
+          {p.links.map((l) => (
+            <a key={l.href} className="btn btn-sm" href={l.href} target="_blank" rel="noopener noreferrer">{l.label} ↗</a>
+          ))}
+        </div>
+      )}
     </article>
   );
 }
 
 export default function Projects() {
   return (
-    <section id="projects" className="section">
+    <section id="projects" className="section alt" aria-label="Case studies">
       <div className="wrap">
-        <p className="eyebrow">Featured projects</p>
-        <h2>Problems I&apos;ve solved</h2>
-        <p className="lead narrow">
-          Four internal tools built at TheFinPedia. The real products contain company data, so each case study
-          pairs a diagram with a short film of the real app running on made-up data (the pipeline has no screen to show).
-        </p>
+        <div className="section-head">
+          <p className="eyebrow">Case studies</p>
+          <h2>How each one was built</h2>
+        </div>
         {projects.map((p, i) => (
           <Reveal key={p.id}><CaseStudy p={p} n={i + 1} /></Reveal>
         ))}
