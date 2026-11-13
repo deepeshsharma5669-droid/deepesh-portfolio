@@ -63,11 +63,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .hero-stack { position: relative; height: 470px; perspective: 1400px; }
 .stack-card { position: absolute; width: 70%; border-radius: 16px; overflow: hidden; border: 1px solid var(--line2); box-shadow: 0 30px 70px rgba(0,0,0,.55); transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .3s; background: #05080f; }
 .stack-card img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
-.stack-card.s0 { right: 0; top: 0; z-index: 3; transform: rotateY(-10deg) rotateX(4deg); }
+/* lower cards sit on top, so every card's caption (top of the poster) stays visible */
+.stack-card.s0 { right: 0; top: 0; z-index: 1; transform: rotateY(-10deg) rotateX(4deg); }
 .stack-card.s1 { left: 0; top: 140px; z-index: 2; transform: rotateY(-10deg) rotateX(4deg); }
-.stack-card.s2 { right: 4%; top: 280px; z-index: 1; transform: rotateY(-10deg) rotateX(4deg); }
+.stack-card.s2 { right: 4%; top: 280px; z-index: 3; transform: rotateY(-10deg) rotateX(4deg); }
 .stack-card:hover, .stack-card:focus-visible { z-index: 5; transform: rotateY(0) rotateX(0) scale(1.03); box-shadow: 0 40px 90px rgba(0,0,0,.65), 0 0 0 1px rgba(45,212,191,.45); }
-.stack-play { position: absolute; left: 14px; bottom: 14px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: .8rem; color: #04101a; background: var(--grad); box-shadow: 0 6px 20px rgba(0,0,0,.4); }
+.stack-play { position: absolute; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 5px; border-radius: 999px; font-size: .78rem; font-weight: 700; color: var(--text); background: rgba(5,8,15,.82); border: 1px solid var(--line2); box-shadow: 0 6px 20px rgba(0,0,0,.4); }
+.stack-card.s0 .stack-play { left: auto; right: 12px; }
+.stack-play i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: .62rem; color: #04101a; background: var(--grad); }
 .stack-cap { position: absolute; bottom: 8px; left: 0; max-width: 24%; font-size: .8rem; line-height: 1.4; color: var(--faint); }
 
 /* hero: stats */
@@ -194,6 +197,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .stack-card { width: 76%; }
   .stack-card.s1 { top: 86px; } .stack-card.s2 { top: 172px; }
   .stack-cap { display: none; }
+  .stack-play { font-size: 0; gap: 0; padding: 4px; }
   .stats { gap: 10px; margin-top: 44px; } .stats a { padding: 16px; }
   .work-grid, .principles, .skills, .cs-more-grid { grid-template-columns: 1fr; }
   .work-media-flow { gap: 6px; padding: 12px; } .work-media-flow span { font-size: .72rem; padding: 8px 9px; } .work-media-flow i { flex-basis: 12px; }

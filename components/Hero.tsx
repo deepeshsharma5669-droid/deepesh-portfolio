@@ -1,5 +1,7 @@
 import { projects, site, stats } from "@/content/site";
 
+const SHORT: Record<string, string> = { dashboard: "Exec Dashboard", crm: "Sales CRM", pmt: "PMT" };
+
 export default function Hero() {
   const filmed = projects.filter((p) => p.film);
   return (
@@ -22,7 +24,7 @@ export default function Hero() {
             <a key={p.id} href={`#${p.id}`} className={`stack-card s${i}`} aria-label={`${p.title}: watch the product film`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={p.film!.poster} alt="" width={1280} height={720} loading={i === 0 ? "eager" : "lazy"} />
-              <span className="stack-play" aria-hidden="true">▶</span>
+              <span className="stack-play" aria-hidden="true"><i>▶</i>{SHORT[p.id] ?? p.title}</span>
             </a>
           ))}
           <p className="stack-cap">Real apps, recorded on mock data</p>
